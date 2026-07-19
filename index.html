@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090D19">
+<title>Kinetic Coach — Full Workout</title>
+<style>
+:root{--bg:#090D19;--panel:#141B2C;--panel2:#1B2439;--muted:#939DBB;--accent:#8F7CFF;--rest:#43D3A0;--text:#fff;--danger:#ffcf67}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button{font:inherit;color:inherit}.app{height:100dvh;max-width:760px;margin:auto;padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));display:grid;grid-template-rows:44px minmax(0,1fr) 54px;gap:8px;overflow:hidden}header{display:flex;justify-content:space-between;align-items:center;min-height:0}.brand{font-weight:900;letter-spacing:1.8px;color:var(--accent);font-size:12px}.statusButton{border:0;background:transparent;padding:2px 0;text-align:left;cursor:pointer}.meta{color:var(--muted);font-size:13px;margin-top:2px;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}.badge{padding:7px 11px;border-radius:999px;background:#28204E;font-weight:900;font-size:10px;letter-spacing:1px;min-width:64px;text-align:center}.stage{min-height:0;display:grid;grid-template-rows:72px minmax(0,1fr) 22px;gap:8px}.topline{display:grid;grid-template-columns:minmax(0,1fr) 100px;align-items:end;gap:10px;min-height:0}.eyebrow{color:var(--muted);font-size:10px;font-weight:900;letter-spacing:1.6px}.title{font-size:clamp(25px,6vw,42px);line-height:1;font-weight:950;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.timer{font-size:clamp(50px,12vw,78px);line-height:.82;font-weight:950;letter-spacing:-4px;text-align:right;font-variant-numeric:tabular-nums}.timer.urgent{color:var(--danger)}.media{min-height:0;border-radius:20px;overflow:hidden;background:var(--panel);position:relative;isolation:isolate}.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center 46%;display:block;background:#0d1322;transition:opacity .18s ease}.media video.preload{opacity:0;pointer-events:none}.media.is-switching video.current{opacity:.16}.sound{position:absolute;top:9px;right:9px;border:0;border-radius:999px;background:rgba(9,13,25,.78);padding:7px 10px;font-weight:800;z-index:3}.phaseOverlay{position:absolute;inset:auto 9px 9px 9px;padding:8px 10px;border-radius:12px;background:rgba(9,13,25,.82);backdrop-filter:blur(10px);display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;z-index:2}.cue{font-size:13px;font-weight:800;line-height:1.2}.next{font-size:11px;color:var(--muted);text-align:right;white-space:nowrap}.bottomInfo{display:grid;gap:6px}.progress{height:8px;background:#1A2238;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--accent);width:100%;transition:width .25s linear}.roundStrip{display:grid;grid-template-columns:repeat(20,1fr);gap:3px}.roundDot{height:4px;border-radius:99px;background:#273149}.roundDot.done{background:#607093}.roundDot.active{background:var(--accent)}.controls{height:54px;display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:8px}.btn{border:0;border-radius:15px;background:#161E32;color:#CDD2E3;font-weight:850;min-width:0}.btn.primary{background:var(--accent);color:white}.btn:disabled{opacity:.45}.modal{position:fixed;inset:0;background:rgba(4,7,14,.72);backdrop-filter:blur(8px);display:grid;place-items:end center;padding:12px;z-index:10}.hidden{display:none!important}.sheet{width:min(680px,100%);max-height:min(84dvh,720px);background:var(--panel);border:1px solid #2a3550;border-radius:24px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}.sheetHead{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid #29334c}.sheetTitle{font-size:20px;font-weight:900}.close{border:0;background:#222c43;border-radius:11px;padding:8px 11px}.plan{overflow:auto;padding:10px}.planItem{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px;border-radius:14px;margin:3px 0}.planItem.active{background:rgba(143,124,255,.18);outline:1px solid rgba(143,124,255,.55)}.planItem.done{opacity:.48}.num{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#222c43;font-size:12px;font-weight:900}.planName{font-weight:850}.planTiming{font-size:12px;color:var(--muted)}.complete{height:100%;display:grid;place-items:center;text-align:center}.complete h1{font-size:48px;margin:8px 0}.complete .meta{text-decoration:none}
+@media(max-height:700px){.app{grid-template-rows:40px minmax(0,1fr) 48px;gap:6px;padding-top:7px;padding-bottom:7px}.stage{grid-template-rows:60px minmax(0,1fr) 18px;gap:6px}.controls{height:48px}.title{font-size:28px}.timer{font-size:54px}.phaseOverlay{padding:7px 9px}.cue{font-size:12px}.media{border-radius:16px}}
+@media(max-width:420px){.app{padding-left:9px;padding-right:9px}.stage{grid-template-rows:64px minmax(0,1fr) 20px}.topline{grid-template-columns:minmax(0,1fr) 84px}.title{font-size:27px}.timer{font-size:52px}.controls{height:50px}.btn{font-size:13px}.phaseOverlay{grid-template-columns:1fr}.next{text-align:left}.sheet{max-height:88dvh}.media video{object-position:center center}}
+</style>
+</head>
+<body>
+<main class="app" id="app">
+<header><div><div class="brand">KINETIC COACH</div><button class="statusButton" id="planButton" type="button" aria-label="Open full workout plan"><div class="meta" id="meta">20:00 left · Round 1/20</div></button></div><div class="badge" id="badge">READY</div></header>
+<section class="stage" id="workStage">
+  <div class="topline"><div><div class="eyebrow" id="eyebrow">TODAY'S SESSION</div><div class="title" id="title">Push-ups</div></div><div class="timer" id="timer">40</div></div>
+  <div class="media" id="media"><button class="sound" id="soundButton" type="button">Sound on</button><video class="current" id="video" muted loop playsinline preload="auto"></video><video class="preload" id="nextVideo" muted loop playsinline preload="auto" aria-hidden="true"></video><div class="phaseOverlay"><div class="cue" id="cue">Press start when you're ready.</div><div class="next" id="nextLabel">Next: Jump squats</div></div></div>
+  <div class="bottomInfo"><div class="progress"><div class="fill" id="fill"></div></div><div class="roundStrip" id="roundStrip"></div></div>
+</section>
+<section class="complete hidden" id="completeStage"><div><div class="eyebrow">SESSION COMPLETE</div><h1>Strong work.</h1><div class="meta">20 minutes finished.</div></div></section>
+<div class="controls"><button class="btn" id="pause" disabled type="button">Pause</button><button class="btn primary" id="mainButton" type="button">Start workout</button><button class="btn" id="reset" type="button">Reset</button></div>
+</main>
+<div class="modal hidden" id="planModal" role="dialog" aria-modal="true" aria-labelledby="planTitle"><div class="sheet"><div class="sheetHead"><div><div class="sheetTitle" id="planTitle">Full workout</div><div class="meta" style="text-decoration:none">40 sec work · 20 sec transition</div></div><button class="close" id="closePlan" type="button">Close</button></div><div class="plan" id="plan"></div></div></div>
+<audio id="tickAudio" src="audio/tick.mp3" preload="auto"></audio><audio id="goAudio" src="audio/go.mp3" preload="auto"></audio><audio id="restAudio" src="audio/rest.mp3" preload="auto"></audio>
+<script>
+const WORK=40,REST=20,TOTAL=1200;
+
+let coachVoice=null,wakeLock=null;
+function loadCoachVoice(){
+  if(!("speechSynthesis" in window))return;
+  const voices=window.speechSynthesis.getVoices();
+  coachVoice=voices.find(v=>/^en(-|_)/i.test(v.lang)&&/Samantha|Daniel|Karen|Moira|Google US English|Microsoft/i.test(v.name))
+    || voices.find(v=>/^en(-|_)/i.test(v.lang)) || voices[0] || null;
+}
+if("speechSynthesis" in window){loadCoachVoice();window.speechSynthesis.addEventListener?.("voiceschanged",loadCoachVoice)}
+function unlockCoachVoice(){
+  if(!("speechSynthesis" in window))return;
+  loadCoachVoice();
+  const u=new SpeechSynthesisUtterance(" \ ");
+  u.volume=0.01;
+  if(coachVoice)u.voice=coachVoice;
+  window.speechSynthesis.speak(u);
+}
+function speakCue(t){
+  if(!soundOn||!("speechSynthesis" in window))return;
+  try{
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t);
+    if(coachVoice)u.voice=coachVoice;
+    u.lang=coachVoice?.lang||"en-US";u.rate=.96;u.pitch=1;u.volume=1;
+    window.speechSynthesis.speak(u);
+    // iOS occasionally pauses long-lived synthesis queues; resume it once queued.
+    setTimeout(()=>window.speechSynthesis.resume(),80);
+  }catch(e){}
+}
+async function requestWakeLock(){
+  if(!running||!("wakeLock" in navigator))return;
+  try{wakeLock=await navigator.wakeLock.request("screen");wakeLock.addEventListener("release",()=>{wakeLock=null})}catch(e){}
+}
+function releaseWakeLock(){try{wakeLock?.release()}catch(e){}wakeLock=null}
+
+const library=[
+{name:"Push-ups",cue:"Brace the core. Lower with control.",video:"https://www.pexels.com/download/video/6389834/",fallback:"videos/push_ups.mp4",position:"center 50%"},
+{name:"Jump squats",cue:"Hips back. Jump straight up. Land softly.",video:"videos/jump_squats.mp4",fallback:"videos/jump_squats.mp4",position:"center"},
+{name:"Reverse lunges",cue:"Stay tall. Drive through the front foot.",video:"https://videos.pexels.com/video-files/8456658/8456658-hd_1920_1080_25fps.mp4",fallback:"videos/reverse_lunges.mp4",position:"center 52%"},
+{name:"Burpees",cue:"Hands down, feet back, strong plank, then jump.",video:"https://www.pexels.com/download/video/8858142/",fallback:"videos/burpees.mp4",position:"center 52%"},
+{name:"Mountain climbers",cue:"Shoulders over wrists. Keep the hips steady.",video:"https://www.pexels.com/download/video/6525467/",fallback:"videos/mountain_climbers.mp4",position:"center 54%"},
+{name:"Shoulder taps",cue:"Slow taps. Resist rotation through the hips.",video:"videos/shoulder_taps.mp4",fallback:"videos/shoulder_taps.mp4",position:"center"},
+{name:"Broad jumps",cue:"Swing the arms and own the landing.",video:"videos/broad_jumps.mp4",fallback:"videos/broad_jumps.mp4",position:"center"},
+{name:"Air squats",cue:"Sit back. Keep heels down and chest tall.",video:"https://www.pexels.com/download/video/8859851/",fallback:"videos/air_squats.mp4",position:"center 48%"}
+];
+const order=[0,1,2,4,5,7,3,6,0,2,1,4,5,7,3,6,0,2,1,3];
+const workout=order.map(i=>library[i]);
+const $=id=>document.getElementById(id);let phase="ready",index=0,seconds=WORK,running=false,timerId=null,soundOn=true,currentKey="";
+function fmt(v){return `${Math.floor(v/60)}:${String(v%60).padStart(2,"0")}`}
+function totalLeft(){if(phase==="ready")return TOTAL;if(phase==="complete")return 0;const completed=index*(WORK+REST)+(phase==="rest"?WORK:0);return Math.max(0,TOTAL-completed-((phase==="work"?WORK:REST)-seconds))}
+function playSound(id){if(!soundOn)return;const a=$(id);a.currentTime=0;a.play().catch(()=>{})}
+function safePlay(v=$("video")){const p=v.play();if(p&&p.catch)p.catch(()=>{})}
+function setSource(videoEl,item){videoEl.dataset.fallback=item.fallback||"";videoEl.dataset.failed="0";videoEl.style.objectPosition=item.position||"center";videoEl.src=item.video;videoEl.load()}
+function ensureCurrent(item){const key=item.name+item.video;if(currentKey===key){if(running)safePlay();return}currentKey=key;const media=$("media");media.classList.add("is-switching");setSource($("video"),item);$("video").oncanplay=()=>{media.classList.remove("is-switching");if(running)safePlay()}}
+function preloadNext(item){if(!item)return;setSource($("nextVideo"),item);$("nextVideo").load()}
+function currentExercise(){return workout[Math.min(index,workout.length-1)]}
+function nextExercise(){return workout[Math.min(index+1,workout.length-1)]}
+function buildPlan(){const p=$("plan");p.innerHTML="";workout.forEach((x,i)=>{const row=document.createElement("div");row.className="planItem"+(i===index&&phase!=="complete"?" active":"")+(i<index||phase==="complete"?" done":"");row.innerHTML=`<div class="num">${i+1}</div><div><div class="planName">${x.name}</div><div class="planTiming">40 sec work · 20 sec transition</div></div><div class="planTiming">${fmt(i*60)}</div>`;p.appendChild(row)});const active=p.querySelector(".active");if(active)setTimeout(()=>active.scrollIntoView({block:"center"}),0)}
+function renderDots(){const s=$("roundStrip");s.innerHTML="";workout.forEach((_,i)=>{const d=document.createElement("div");d.className="roundDot"+(i<index?" done":"")+(i===index&&phase!=="complete"?" active":"");s.appendChild(d)})}
+function render(){const complete=phase==="complete";$("workStage").classList.toggle("hidden",complete);$("completeStage").classList.toggle("hidden",!complete);$("badge").textContent=phase.toUpperCase();$("meta").textContent=`${fmt(totalLeft())} left · Round ${Math.min(index+1,20)}/20`;$("pause").disabled=phase==="ready"||complete;$("pause").textContent=running?"Pause":"Resume";$("mainButton").textContent=phase==="ready"?"Start workout":complete?"Restart":"Skip";if(complete){$("video").pause();renderDots();return}const display=phase==="rest"?nextExercise():currentExercise();$("title").textContent=display.name;$("eyebrow").textContent=phase==="ready"?"TODAY'S SESSION":phase==="rest"?"NEXT UP":"MOVE";$("timer").textContent=seconds;$("timer").classList.toggle("urgent",seconds<=5&&phase!=="ready");$("fill").style.width=`${Math.max(0,seconds/(phase==="rest"?REST:WORK))*100}%`;$("cue").textContent=phase==="ready"?"Press start when you're ready.":phase==="rest"?`Recover. ${display.cue}`:display.cue;$("nextLabel").textContent=index>=19?"Final round":`Next: ${nextExercise().name}`;ensureCurrent(display);preloadNext(index<19?nextExercise():null);renderDots()}
+function enterWork(){phase="work";seconds=WORK;render();playSound("goAudio");const x=currentExercise();setTimeout(()=>speakCue(`${x.name}. ${x.cue}`),220)}
+function enterRest(){phase="rest";seconds=REST;render();playSound("restAudio");const x=nextExercise();setTimeout(()=>speakCue(`Recover. Next, ${x.name}.`),220)}
+function complete(){phase="complete";seconds=0;running=false;clearInterval(timerId);timerId=null;render();playSound("goAudio");speakCue("Outstanding. Workout complete.");releaseWakeLock()}
+function advance(){if(phase==="work"){enterRest()}else if(phase==="rest"){if(index>=19)complete();else{index++;enterWork()}}}
+function tick(){if(!running)return;seconds--;if(seconds<=0)advance();else{if(seconds<=3)playSound("tickAudio");render()}}
+function start(){unlockCoachVoice();if(phase==="complete")reset();running=true;requestWakeLock();if(phase==="ready")enterWork();if(timerId===null)timerId=setInterval(tick,1000);safePlay();render()}
+function reset(){running=false;releaseWakeLock();if("speechSynthesis" in window)window.speechSynthesis.cancel();if(timerId!==null)clearInterval(timerId);timerId=null;phase="ready";index=0;seconds=WORK;currentKey="";render()}
+[$("video"),$("nextVideo")].forEach(v=>v.addEventListener("error",()=>{if(v.dataset.failed==="1")return;const fallback=v.dataset.fallback;if(!fallback)return;v.dataset.failed="1";v.src=fallback;v.load();if(v.id==="video"&&running)safePlay(v)}));
+$("mainButton").addEventListener("click",()=>phase==="ready"||phase==="complete"?start():advance());$("pause").addEventListener("click",()=>{if(phase==="ready"||phase==="complete")return;running=!running;if(running){requestWakeLock();safePlay();speakCue("Let's keep moving.")}else{releaseWakeLock();$("video").pause();if("speechSynthesis" in window)window.speechSynthesis.cancel()}render()});$("reset").addEventListener("click",reset);$("soundButton").addEventListener("click",()=>{soundOn=!soundOn;$("soundButton").textContent=soundOn?"Sound on":"Sound off";if(soundOn){unlockCoachVoice();playSound("tickAudio");setTimeout(()=>speakCue("Coach voice on."),180)}else if("speechSynthesis" in window)window.speechSynthesis.cancel()});$("planButton").addEventListener("click",()=>{buildPlan();$("planModal").classList.remove("hidden")});$("closePlan").addEventListener("click",()=>$("planModal").classList.add("hidden"));$("planModal").addEventListener("click",e=>{if(e.target===$("planModal"))$("planModal").classList.add("hidden")});document.addEventListener("keydown",e=>{if(e.key==="Escape")$("planModal").classList.add("hidden")});document.addEventListener("visibilitychange",()=>{if(document.hidden){$("video").pause()}else if(running){requestWakeLock();safePlay()}});window.addEventListener("pagehide",releaseWakeLock);render();
+</script>
+</body>
+</html>
