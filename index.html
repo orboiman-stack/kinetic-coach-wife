@@ -4,98 +4,440 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#090D19">
-<title>Kinetic Coach — Full Workout</title>
+<title>Kinetic Coach</title>
 <style>
 :root{--bg:#090D19;--panel:#141B2C;--panel2:#1B2439;--muted:#939DBB;--accent:#8F7CFF;--rest:#43D3A0;--text:#fff;--danger:#ffcf67}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button{font:inherit;color:inherit}.app{height:100dvh;max-width:760px;margin:auto;padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));display:grid;grid-template-rows:44px minmax(0,1fr) 54px;gap:8px;overflow:hidden}header{display:flex;justify-content:space-between;align-items:center;min-height:0}.brand{font-weight:900;letter-spacing:1.8px;color:var(--accent);font-size:12px}.statusButton{border:0;background:transparent;padding:2px 0;text-align:left;cursor:pointer}.meta{color:var(--muted);font-size:13px;margin-top:2px;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}.badge{padding:7px 11px;border-radius:999px;background:#28204E;font-weight:900;font-size:10px;letter-spacing:1px;min-width:64px;text-align:center}.stage{min-height:0;display:grid;grid-template-rows:72px minmax(0,1fr) 22px;gap:8px}.topline{display:grid;grid-template-columns:minmax(0,1fr) 100px;align-items:end;gap:10px;min-height:0}.eyebrow{color:var(--muted);font-size:10px;font-weight:900;letter-spacing:1.6px}.title{font-size:clamp(25px,6vw,42px);line-height:1;font-weight:950;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.timer{font-size:clamp(50px,12vw,78px);line-height:.82;font-weight:950;letter-spacing:-4px;text-align:right;font-variant-numeric:tabular-nums}.timer.urgent{color:var(--danger)}.media{min-height:0;border-radius:20px;overflow:hidden;background:var(--panel);position:relative;isolation:isolate}.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center 46%;display:block;background:#0d1322;transition:opacity .18s ease}.media video.preload{opacity:0;pointer-events:none}.media.is-switching video.current{opacity:.16}.sound{position:absolute;top:9px;right:9px;border:0;border-radius:999px;background:rgba(9,13,25,.78);padding:7px 10px;font-weight:800;z-index:3}.phaseOverlay{position:absolute;inset:auto 9px 9px 9px;padding:8px 10px;border-radius:12px;background:rgba(9,13,25,.82);backdrop-filter:blur(10px);display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;z-index:2}.cue{font-size:13px;font-weight:800;line-height:1.2}.next{font-size:11px;color:var(--muted);text-align:right;white-space:nowrap}.bottomInfo{display:grid;gap:6px}.progress{height:8px;background:#1A2238;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--accent);width:100%;transition:width .25s linear}.roundStrip{display:grid;grid-template-columns:repeat(20,1fr);gap:3px}.roundDot{height:4px;border-radius:99px;background:#273149}.roundDot.done{background:#607093}.roundDot.active{background:var(--accent)}.controls{height:54px;display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:8px}.btn{border:0;border-radius:15px;background:#161E32;color:#CDD2E3;font-weight:850;min-width:0}.btn.primary{background:var(--accent);color:white}.btn:disabled{opacity:.45}.modal{position:fixed;inset:0;background:rgba(4,7,14,.72);backdrop-filter:blur(8px);display:grid;place-items:end center;padding:12px;z-index:10}.hidden{display:none!important}.sheet{width:min(680px,100%);max-height:min(84dvh,720px);background:var(--panel);border:1px solid #2a3550;border-radius:24px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}.sheetHead{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid #29334c}.sheetTitle{font-size:20px;font-weight:900}.close{border:0;background:#222c43;border-radius:11px;padding:8px 11px}.plan{overflow:auto;padding:10px}.planItem{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px;border-radius:14px;margin:3px 0}.planItem.active{background:rgba(143,124,255,.18);outline:1px solid rgba(143,124,255,.55)}.planItem.done{opacity:.48}.num{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#222c43;font-size:12px;font-weight:900}.planName{font-weight:850}.planTiming{font-size:12px;color:var(--muted)}.complete{height:100%;display:grid;place-items:center;text-align:center}.complete h1{font-size:48px;margin:8px 0}.complete .meta{text-decoration:none}
-@media(max-height:700px){.app{grid-template-rows:40px minmax(0,1fr) 48px;gap:6px;padding-top:7px;padding-bottom:7px}.stage{grid-template-rows:60px minmax(0,1fr) 18px;gap:6px}.controls{height:48px}.title{font-size:28px}.timer{font-size:54px}.phaseOverlay{padding:7px 9px}.cue{font-size:12px}.media{border-radius:16px}}
-@media(max-width:420px){.app{padding-left:9px;padding-right:9px}.stage{grid-template-rows:64px minmax(0,1fr) 20px}.topline{grid-template-columns:minmax(0,1fr) 84px}.title{font-size:27px}.timer{font-size:52px}.controls{height:50px}.btn{font-size:13px}.phaseOverlay{grid-template-columns:1fr}.next{text-align:left}.sheet{max-height:88dvh}.media video{object-position:center center}}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit;color:inherit}
+.app{height:100dvh;max-width:760px;margin:auto;padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));display:grid;grid-template-rows:44px minmax(0,1fr) 54px;gap:8px;overflow:hidden}
+header{display:flex;justify-content:space-between;align-items:center;min-height:0}
+.brand{font-weight:900;letter-spacing:1.8px;color:var(--accent);font-size:12px}
+.statusButton{border:0;background:transparent;padding:2px 0;text-align:left;cursor:pointer}
+.meta{color:var(--muted);font-size:13px;margin-top:2px}
+.meta.link{text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+.badge{padding:7px 11px;border-radius:999px;background:#28204E;font-weight:900;font-size:10px;letter-spacing:1px;min-width:64px;text-align:center}
+/* MENU */
+.menu{min-height:0;overflow:auto;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:6px 2px}
+.menuHero h1{font-size:clamp(30px,8vw,46px);line-height:1.02;font-weight:950;margin:0}
+.menuHero p{color:var(--muted);margin:8px 0 0;font-size:14px}
+.section-label{font-size:11px;font-weight:900;letter-spacing:1.6px;color:var(--muted);margin-bottom:10px}
+.diffGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.diffCard{border:1px solid #2a3550;background:var(--panel);border-radius:18px;padding:16px 12px;text-align:left;cursor:pointer;transition:transform .12s ease,border-color .12s ease,background .12s ease}
+.diffCard:active{transform:scale(.98)}
+.diffCard.sel{border-color:var(--accent);background:rgba(143,124,255,.16);box-shadow:0 0 0 1px var(--accent) inset}
+.diffCard .dt{font-weight:900;font-size:17px}
+.diffCard .dd{color:var(--muted);font-size:11px;margin-top:4px;line-height:1.3}
+.focusWrap{margin-top:4px}
+.focusInput{width:100%;border:1px solid #2a3550;background:var(--panel);color:var(--text);border-radius:14px;padding:14px 14px;font-size:15px;outline:none}
+.focusInput:focus{border-color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chip{border:1px solid #2a3550;background:var(--panel2);color:var(--muted);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.chip.on{border-color:var(--accent);color:#fff;background:rgba(143,124,255,.22)}
+.startBtn{border:0;border-radius:16px;background:var(--accent);color:#fff;font-weight:900;font-size:17px;padding:16px;cursor:pointer;margin-top:4px}
+.startBtn:active{transform:scale(.99)}
+.planPreview{color:var(--muted);font-size:12px;text-align:center;margin-top:2px}
+/* WORK */
+.stage{min-height:0;display:grid;grid-template-rows:72px minmax(0,1fr) 22px;gap:8px}
+.topline{display:grid;grid-template-columns:minmax(0,1fr) 100px;align-items:end;gap:10px;min-height:0}
+.eyebrow{color:var(--muted);font-size:10px;font-weight:900;letter-spacing:1.6px}
+.title{font-size:clamp(23px,5.6vw,40px);line-height:1;font-weight:950;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timer{font-size:clamp(50px,12vw,78px);line-height:.82;font-weight:950;letter-spacing:-4px;text-align:right;font-variant-numeric:tabular-nums}
+.timer.urgent{color:var(--danger)}
+.media{min-height:0;border-radius:20px;overflow:hidden;background:var(--panel);position:relative;isolation:isolate}
+.media video,.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center 46%;display:block;background:#0d1322;transition:opacity .18s ease}
+.media img{object-fit:contain;background:#f4f5fa}
+.media .hide{opacity:0;pointer-events:none}
+.media.is-switching .show{opacity:.16}
+.sound{position:absolute;top:9px;right:9px;border:0;border-radius:999px;background:rgba(9,13,25,.78);padding:7px 10px;font-weight:800;z-index:3}
+.phaseOverlay{position:absolute;inset:auto 9px 9px 9px;padding:8px 10px;border-radius:12px;background:rgba(9,13,25,.82);backdrop-filter:blur(10px);display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;z-index:2}
+.cue{font-size:13px;font-weight:800;line-height:1.2}
+.next{font-size:11px;color:var(--muted);text-align:right;white-space:nowrap}
+.bottomInfo{display:grid;gap:6px}
+.progress{height:8px;background:#1A2238;border-radius:99px;overflow:hidden}
+.fill{height:100%;background:var(--accent);width:100%;transition:width .25s linear}
+.roundStrip{display:flex;gap:3px}
+.roundDot{height:4px;border-radius:99px;background:#273149;flex:1}
+.roundDot.done{background:#607093}.roundDot.active{background:var(--accent)}
+.controls{height:54px;display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:8px}
+.btn{border:0;border-radius:15px;background:#161E32;color:#CDD2E3;font-weight:850;min-width:0}
+.btn.primary{background:var(--accent);color:white}.btn:disabled{opacity:.45}
+.modal{position:fixed;inset:0;background:rgba(4,7,14,.72);backdrop-filter:blur(8px);display:grid;place-items:end center;padding:12px;z-index:10}
+.hidden{display:none!important}
+.sheet{width:min(680px,100%);max-height:min(84dvh,720px);background:var(--panel);border:1px solid #2a3550;border-radius:24px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
+.sheetHead{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid #29334c}
+.sheetTitle{font-size:20px;font-weight:900}.close{border:0;background:#222c43;border-radius:11px;padding:8px 11px}
+.plan{overflow:auto;padding:10px}
+.planItem{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px;border-radius:14px;margin:3px 0}
+.planItem.active{background:rgba(143,124,255,.18);outline:1px solid rgba(143,124,255,.55)}
+.planItem.done{opacity:.48}
+.num{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#222c43;font-size:12px;font-weight:900}
+.planName{font-weight:850}.planTiming{font-size:12px;color:var(--muted)}
+.complete{height:100%;display:grid;place-items:center;text-align:center}
+.complete h1{font-size:48px;margin:8px 0}
+@media(max-height:720px){.app{grid-template-rows:40px minmax(0,1fr) 48px;gap:6px}.stage{grid-template-rows:60px minmax(0,1fr) 18px;gap:6px}.controls{height:48px}.title{font-size:27px}.timer{font-size:54px}}
+@media(max-width:420px){.diffGrid{grid-template-columns:1fr;gap:8px}.diffCard{display:flex;align-items:baseline;gap:10px}.diffCard .dd{margin-top:0}.stage{grid-template-rows:64px minmax(0,1fr) 20px}.title{font-size:26px}.timer{font-size:52px}.phaseOverlay{grid-template-columns:1fr}.next{text-align:left}}
 </style>
 </head>
 <body>
 <main class="app" id="app">
-<header><div><div class="brand">KINETIC COACH</div><button class="statusButton" id="planButton" type="button" aria-label="Open full workout plan"><div class="meta" id="meta">20:00 left · Round 1/20</div></button></div><div class="badge" id="badge">READY</div></header>
-<section class="stage" id="workStage">
-  <div class="topline"><div><div class="eyebrow" id="eyebrow">TODAY'S SESSION</div><div class="title" id="title">Push-ups</div></div><div class="timer" id="timer">40</div></div>
-  <div class="media" id="media"><button class="sound" id="soundButton" type="button">Sound on</button><video class="current" id="video" muted loop playsinline preload="auto"></video><video class="preload" id="nextVideo" muted loop playsinline preload="auto" aria-hidden="true"></video><div class="phaseOverlay"><div class="cue" id="cue">Press start when you're ready.</div><div class="next" id="nextLabel">Next: Jump squats</div></div></div>
+<header>
+  <div><div class="brand">KINETIC COACH</div><button class="statusButton" id="planButton" type="button" aria-label="Open workout plan"><div class="meta link hidden" id="meta">20:00 left</div></button></div>
+  <div class="badge hidden" id="badge">READY</div>
+</header>
+
+<!-- MENU -->
+<section class="menu" id="menuStage">
+  <div class="menuHero"><h1>Let's move.</h1><p>Pick your intensity and what you want to work. I'll build the session.</p></div>
+  <div>
+    <div class="section-label">INTENSITY</div>
+    <div class="diffGrid" id="diffGrid">
+      <button class="diffCard" data-diff="easy" type="button"><div class="dt">Easy</div><div class="dd">Gentle pace · low impact · ~10 min</div></button>
+      <button class="diffCard sel" data-diff="medium" type="button"><div class="dt">Medium</div><div class="dd">Balanced burn · mixed · ~14 min</div></button>
+      <button class="diffCard" data-diff="hard" type="button"><div class="dt">Hard</div><div class="dd">High intensity · plyo · ~18 min</div></button>
+    </div>
+  </div>
+  <div class="focusWrap">
+    <div class="section-label">FOCUS (OPTIONAL)</div>
+    <input class="focusInput" id="focusInput" type="text" placeholder="e.g. core and glutes, upper body, cardio…" autocomplete="off">
+    <div class="chips" id="chips">
+      <button class="chip" data-focus="core" type="button">Core</button>
+      <button class="chip" data-focus="legs" type="button">Legs</button>
+      <button class="chip" data-focus="glutes" type="button">Glutes</button>
+      <button class="chip" data-focus="upper" type="button">Upper body</button>
+      <button class="chip" data-focus="cardio" type="button">Cardio</button>
+      <button class="chip" data-focus="full" type="button">Full body</button>
+    </div>
+  </div>
+  <button class="startBtn" id="buildBtn" type="button">Build my workout</button>
+  <div class="planPreview" id="planPreview"></div>
+</section>
+
+<!-- WORK -->
+<section class="stage hidden" id="workStage">
+  <div class="topline"><div><div class="eyebrow" id="eyebrow">TODAY'S SESSION</div><div class="title" id="title">Ready</div></div><div class="timer" id="timer">40</div></div>
+  <div class="media" id="media">
+    <button class="sound" id="soundButton" type="button">Sound on</button>
+    <video class="show" id="video" muted loop playsinline preload="auto"></video>
+    <img class="hide" id="frame" alt="" decoding="async">
+    <div class="phaseOverlay"><div class="cue" id="cue">Press start when you're ready.</div><div class="next" id="nextLabel"></div></div>
+  </div>
   <div class="bottomInfo"><div class="progress"><div class="fill" id="fill"></div></div><div class="roundStrip" id="roundStrip"></div></div>
 </section>
-<section class="complete hidden" id="completeStage"><div><div class="eyebrow">SESSION COMPLETE</div><h1>Strong work.</h1><div class="meta">20 minutes finished.</div></div></section>
-<div class="controls"><button class="btn" id="pause" disabled type="button">Pause</button><button class="btn primary" id="mainButton" type="button">Start workout</button><button class="btn" id="reset" type="button">Reset</button></div>
-</main>
-<div class="modal hidden" id="planModal" role="dialog" aria-modal="true" aria-labelledby="planTitle"><div class="sheet"><div class="sheetHead"><div><div class="sheetTitle" id="planTitle">Full workout</div><div class="meta" style="text-decoration:none">40 sec work · 20 sec transition</div></div><button class="close" id="closePlan" type="button">Close</button></div><div class="plan" id="plan"></div></div></div>
-<audio id="tickAudio" src="audio/tick.mp3" preload="auto"></audio><audio id="goAudio" src="audio/go.mp3" preload="auto"></audio><audio id="restAudio" src="audio/rest.mp3" preload="auto"></audio>
-<script>
-const WORK=40,REST=20,TOTAL=1200;
 
-let coachVoice=null,wakeLock=null;
+<!-- COMPLETE -->
+<section class="complete hidden" id="completeStage"><div><div class="eyebrow">SESSION COMPLETE</div><h1>Strong work.</h1><div class="meta" id="completeMeta">Nice session.</div><button class="startBtn" id="againBtn" type="button" style="margin-top:18px">New workout</button></div></section>
+
+<div class="controls hidden" id="controls">
+  <button class="btn" id="pause" disabled type="button">Pause</button>
+  <button class="btn primary" id="mainButton" type="button">Start</button>
+  <button class="btn" id="reset" type="button">Menu</button>
+</div>
+</main>
+
+<div class="modal hidden" id="planModal" role="dialog" aria-modal="true" aria-labelledby="planTitle">
+  <div class="sheet"><div class="sheetHead"><div><div class="sheetTitle" id="planTitle">Your workout</div><div class="meta" id="planSub"></div></div><button class="close" id="closePlan" type="button">Close</button></div><div class="plan" id="plan"></div></div>
+</div>
+
+<audio id="tickAudio" src="audio/tick.mp3" preload="auto"></audio>
+<audio id="goAudio" src="audio/go.mp3" preload="auto"></audio>
+<audio id="restAudio" src="audio/rest.mp3" preload="auto"></audio>
+
+<script>
+/* ---------- exercise library (tagged) ---------- */
+const LIBRARY = [
+{name:"Push-ups",cue:"Brace the core, lower with control, press strong.",level:"beginner",impact:"low",focus:["upper","core"],video:"videos/push_ups.mp4"},
+{name:"Jump squats",cue:"Hips back, jump straight up, land soft.",level:"intermediate",impact:"high",focus:["legs","glutes","cardio"],video:"videos/jump_squats.mp4"},
+{name:"Reverse lunges",cue:"Stay tall, drive through the front foot.",level:"beginner",impact:"low",focus:["legs","glutes"],video:"videos/reverse_lunges.mp4"},
+{name:"Burpees",cue:"Hands down, feet back, plank, then jump.",level:"intermediate",impact:"high",focus:["cardio","legs","upper"],video:"videos/burpees.mp4"},
+{name:"Mountain climbers",cue:"Shoulders over wrists, drive the knees, steady hips.",level:"beginner",impact:"high",focus:["core","cardio"],video:"videos/mountain_climbers.mp4"},
+{name:"Shoulder taps",cue:"Slow taps, resist the rotation, tight core.",level:"beginner",impact:"low",focus:["core","upper"],video:"videos/shoulder_taps.mp4"},
+{name:"Broad jumps",cue:"Swing the arms, jump far, own the landing.",level:"intermediate",impact:"high",focus:["legs","cardio"],video:"videos/broad_jumps.mp4"},
+{name:"Air squats",cue:"Sit back, heels down, chest tall, drive up.",level:"beginner",impact:"low",focus:["legs","glutes"],video:"videos/air_squats.mp4"},
+{name:"Wide push-ups",cue:"Chest proud, elbows track back, control the lower.",level:"beginner",impact:"low",focus:["upper","core"],img:"Push-Up_Wide"},
+{name:"Decline push-ups",cue:"Feet up, core tight, press the floor away.",level:"beginner",impact:"low",focus:["upper"],img:"Decline_Push-Up"},
+{name:"Incline push-ups",cue:"Hands elevated, smooth reps, full lockout.",level:"beginner",impact:"low",focus:["upper"],img:"Incline_Push-Up"},
+{name:"Plyo push-ups",cue:"Explode off the floor, land soft, reset fast.",level:"beginner",impact:"high",focus:["upper","cardio"],img:"Plyo_Push-up"},
+{name:"Close-grip push-ups",cue:"Elbows tucked, squeeze the triceps at the top.",level:"intermediate",impact:"low",focus:["upper"],img:"Push-Ups_-_Close_Triceps_Position"},
+{name:"Clock push-ups",cue:"Walk the hands around, own every angle.",level:"intermediate",impact:"low",focus:["upper"],img:"Clock_Push-Up"},
+{name:"Bench dips",cue:"Chest up, dip to ninety, drive through the palms.",level:"beginner",impact:"low",focus:["upper"],img:"Bench_Dips"},
+{name:"Plank ups",cue:"Plank to press, control the lower every rep.",level:"intermediate",impact:"low",focus:["core","upper"],img:"Body-Up"},
+{name:"Bodyweight squats",cue:"Sit back, knees out, chest tall, drive up.",level:"beginner",impact:"low",focus:["glutes","legs"],img:"Bodyweight_Squat"},
+{name:"Freehand jump squats",cue:"Load the hips, jump big, land soft and quiet.",level:"intermediate",impact:"high",focus:["glutes","legs"],img:"Freehand_Jump_Squat"},
+{name:"Walking lunges",cue:"Long steps, front heel down, stay tall.",level:"beginner",impact:"low",focus:["glutes","legs"],img:"Bodyweight_Walking_Lunge"},
+{name:"Box jumps",cue:"Explode up, soft landing, control the step down.",level:"intermediate",impact:"high",focus:["glutes","legs","cardio"],img:"Bench_Jump"},
+{name:"Frog hops",cue:"Stay low, spring forward, reset every jump.",level:"intermediate",impact:"high",focus:["glutes","legs"],img:"Frog_Hops"},
+{name:"Lateral bounds",cue:"Bound side to side, stick each landing.",level:"beginner",impact:"high",focus:["glutes","legs","cardio"],img:"Alternate_Leg_Diagonal_Bound"},
+{name:"Fast skipping",cue:"Light on the toes, quick feet, drive the knees.",level:"beginner",impact:"high",focus:["legs","cardio"],img:"Fast_Skipping"},
+{name:"Butt kicks",cue:"Snap the heels up, fast turnover, stay springy.",level:"beginner",impact:"high",focus:["legs","cardio"],img:"Double_Leg_Butt_Kick"},
+{name:"Tuck jumps",cue:"Explode up, knees to chest, land soft.",level:"beginner",impact:"high",focus:["legs","cardio"],img:"Knee_Tuck_Jump"},
+{name:"Glute bridges",cue:"Squeeze the glutes, drive the hips sky-high.",level:"beginner",impact:"low",focus:["glutes"],img:"Butt_Lift_Bridge"},
+{name:"Single-leg bridges",cue:"One leg, full hip lift, control the drop.",level:"beginner",impact:"low",focus:["glutes"],img:"Single_Leg_Glute_Bridge"},
+{name:"Glute kickbacks",cue:"Drive the heel back, squeeze at the top.",level:"beginner",impact:"low",focus:["glutes"],img:"Glute_Kickback"},
+{name:"Step-up knee drives",cue:"Drive through the lead leg, punch the knee up.",level:"beginner",impact:"low",focus:["glutes","legs"],img:"Step-up_with_Knee_Raise"},
+{name:"Lying leg lifts",cue:"Legs straight, lower slow, keep the low back down.",level:"beginner",impact:"low",focus:["core"],img:"Leg_Lift"},
+{name:"Bicycle crunches",cue:"Elbow to knee, twist through the core, breathe.",level:"beginner",impact:"low",focus:["core"],img:"Air_Bike"},
+{name:"Crunches",cue:"Ribs to hips, chin off the chest, control down.",level:"beginner",impact:"low",focus:["core"],img:"Crunches"},
+{name:"Cross-body crunches",cue:"Reach across, squeeze the obliques, slow return.",level:"beginner",impact:"low",focus:["core"],img:"Cross-Body_Crunch"},
+{name:"Flutter kicks",cue:"Small fast kicks, low back down, core braced.",level:"beginner",impact:"low",focus:["core"],img:"Flutter_Kicks"},
+{name:"Hip raises",cue:"Curl the hips up, control the lower every time.",level:"beginner",impact:"low",focus:["core"],img:"Bent-Knee_Hip_Raise"},
+{name:"Dead bugs",cue:"Opposite arm and leg, slow and steady, ribs down.",level:"beginner",impact:"low",focus:["core"],img:"Dead_Bug"},
+{name:"Cocoons",cue:"Curl in tight, extend long, keep the core loaded.",level:"beginner",impact:"low",focus:["core"],img:"Cocoons"},
+{name:"Pike ups",cue:"Forearms down, pike the hips up, feel the abs.",level:"beginner",impact:"low",focus:["core"],img:"Butt-Ups"},
+{name:"Sit-ups",cue:"Drive up strong, only three-quarters down, repeat.",level:"beginner",impact:"low",focus:["core"],img:"3_4_Sit-Up"},
+{name:"Heel touches",cue:"Side to side, tap the heels, squeeze the sides.",level:"beginner",impact:"low",focus:["core"],img:"Alternate_Heel_Touchers"},
+{name:"Inchworms",cue:"Walk out to plank, walk back, keep legs long.",level:"beginner",impact:"low",focus:["legs","core"],img:"Inchworm"},
+{name:"Supermans",cue:"Lift chest and legs, squeeze the back, hold a beat.",level:"beginner",impact:"low",focus:["core","glutes"],img:"Superman"},
+{name:"Back extensions",cue:"Lift the chest, squeeze the low back, control down.",level:"intermediate",impact:"low",focus:["core","glutes"],img:"Hyperextensions_With_No_Hyperextension_Bench"},
+{name:"Pike push-ups",cue:"Hips high, lower the crown, press overhead.",level:"expert",impact:"low",focus:["upper"],img:"Handstand_Push-Ups"},
+{name:"Tricep dips",cue:"Chest tall, dip deep, drive to lockout.",level:"beginner",impact:"low",focus:["upper"],img:"Dips_-_Triceps_Version"}
+];
+const CDN="https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/";
+const RAW="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/";
+
+/* ---------- difficulty presets ---------- */
+const DIFF={
+  easy:  {work:35,rest:25,rounds:10,levels:["beginner"],allowHigh:false,label:"Easy"},
+  medium:{work:40,rest:20,rounds:14,levels:["beginner","intermediate"],allowHigh:true,label:"Medium"},
+  hard:  {work:45,rest:15,rounds:18,levels:["beginner","intermediate","expert"],allowHigh:true,preferHigh:true,label:"Hard"}
+};
+
+/* ---------- focus parsing ---------- */
+const FOCUS_WORDS={
+  core:["core","ab","abs","abdomin","stomach","belly","oblique","tummy","midsection"],
+  legs:["leg","legs","quad","thigh","calf","calve","hamstring","lower body"],
+  glutes:["glute","glutes","butt","booty","bum","hip"],
+  upper:["upper","arm","arms","chest","push","shoulder","back","tricep","bicep","press"],
+  cardio:["cardio","hiit","conditioning","heart","sweat","endurance","fat"],
+  full:["full","total","whole","everything","all over","general","body"]
+};
+function parseFocus(text){
+  const t=(text||"").toLowerCase();
+  const set=new Set();
+  for(const key in FOCUS_WORDS){ if(FOCUS_WORDS[key].some(w=>t.includes(w))) set.add(key); }
+  if(set.has("full")){ return null; } // full body = everything
+  return set.size? [...set] : null;
+}
+
+/* ---------- workout generation ---------- */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function generate(diffKey, focusKeys){
+  const d=DIFF[diffKey];
+  let pool=LIBRARY.filter(e=>d.levels.includes(e.level));
+  if(!d.allowHigh) pool=pool.filter(e=>e.impact==="low");
+  // focus filter
+  let focused=pool;
+  if(focusKeys && focusKeys.length){
+    const wanted=new Set(focusKeys);
+    focused=pool.filter(e=>e.focus.some(f=>wanted.has(f)));
+    if(focused.length<5) focused=pool; // relax if too narrow
+  }
+  // hard prefers some high-impact
+  let bag=shuffle(focused);
+  if(d.preferHigh){
+    const hi=shuffle(focused.filter(e=>e.impact==="high"));
+    const lo=shuffle(focused.filter(e=>e.impact!=="high"));
+    bag=[]; while(hi.length||lo.length){ if(hi.length)bag.push(hi.shift()); if(hi.length)bag.push(hi.shift()); if(lo.length)bag.push(lo.shift()); }
+  }
+  // build ordered list, avoid back-to-back repeats
+  const out=[]; let i=0, guard=0;
+  while(out.length<d.rounds && guard<d.rounds*20){
+    const pick=bag[i%bag.length];
+    if(!out.length || out[out.length-1].name!==pick.name) out.push(pick);
+    i++; guard++;
+    if(i%bag.length===0) bag=shuffle(bag);
+  }
+  return {work:d.work,rest:d.rest,list:out,label:d.label};
+}
+
+/* ---------- state ---------- */
+let plan=null, WORK=40, REST=20, TOTAL=0, ROUNDS=0;
+let phase="menu", index=0, seconds=40, running=false, timerId=null, soundOn=true, currentKey="", frameTimer=null;
+let selDiff="medium";
+const $=id=>document.getElementById(id);
+const fmt=v=>`${Math.floor(v/60)}:${String(Math.max(0,v)%60).padStart(2,"0")}`;
+
+/* ---------- audio: coexist with device music ---------- */
+try{ if(navigator.audioSession) navigator.audioSession.type="ambient"; }catch(e){}
+function playSound(id){ if(!soundOn)return; const a=$(id); try{a.volume=voiceActive?0.35:1; a.currentTime=0; a.play().catch(()=>{});}catch(e){} }
+
+/* ---------- voice: premium (ElevenLabs via function) + device fallback ---------- */
+let coachVoice=null, premiumOK=true, voiceActive=false;
+const voiceAudio=new Audio(); voiceAudio.preload="auto";
+const speechCache=new Map();
 function loadCoachVoice(){
   if(!("speechSynthesis" in window))return;
-  const voices=window.speechSynthesis.getVoices();
-  coachVoice=voices.find(v=>/^en(-|_)/i.test(v.lang)&&/Samantha|Daniel|Karen|Moira|Google US English|Microsoft/i.test(v.name))
-    || voices.find(v=>/^en(-|_)/i.test(v.lang)) || voices[0] || null;
+  const v=window.speechSynthesis.getVoices();
+  coachVoice=v.find(x=>/en(-|_)(US|GB|AU)/i.test(x.lang)&&/(Samantha|Google US English|Google UK English Female|Karen|Moira|Aria|Jenny|Natural|Neural|Enhanced)/i.test(x.name))
+    || v.find(x=>/^en/i.test(x.lang)&&/female|Samantha|Google/i.test(x.name))
+    || v.find(x=>/^en/i.test(x.lang)) || v[0] || null;
 }
-if("speechSynthesis" in window){loadCoachVoice();window.speechSynthesis.addEventListener?.("voiceschanged",loadCoachVoice)}
-function unlockCoachVoice(){
+if("speechSynthesis" in window){ loadCoachVoice(); window.speechSynthesis.addEventListener?.("voiceschanged",loadCoachVoice); }
+function browserSay(text){
   if(!("speechSynthesis" in window))return;
-  loadCoachVoice();
-  const u=new SpeechSynthesisUtterance(" \ ");
-  u.volume=0.01;
-  if(coachVoice)u.voice=coachVoice;
-  window.speechSynthesis.speak(u);
-}
-function speakCue(t){
-  if(!soundOn||!("speechSynthesis" in window))return;
   try{
     window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(t);
+    const u=new SpeechSynthesisUtterance(text);
     if(coachVoice)u.voice=coachVoice;
-    u.lang=coachVoice?.lang||"en-US";u.rate=.96;u.pitch=1;u.volume=1;
+    u.lang=coachVoice?.lang||"en-US"; u.rate=1.06; u.pitch=1.12; u.volume=1;
+    u.onstart=()=>duck(true); u.onend=()=>duck(false); u.onerror=()=>duck(false);
     window.speechSynthesis.speak(u);
-    // iOS occasionally pauses long-lived synthesis queues; resume it once queued.
     setTimeout(()=>window.speechSynthesis.resume(),80);
-  }catch(e){}
+  }catch(e){ duck(false); }
 }
-async function requestWakeLock(){
-  if(!running||!("wakeLock" in navigator))return;
-  try{wakeLock=await navigator.wakeLock.request("screen");wakeLock.addEventListener("release",()=>{wakeLock=null})}catch(e){}
+function duck(on){ voiceActive=on; [ "tickAudio","goAudio","restAudio"].forEach(id=>{const a=$(id); if(a) a.volume=on?0.35:1;}); }
+async function premiumSay(text){
+  try{
+    let url=speechCache.get(text);
+    if(!url){
+      const r=await fetch("/.netlify/functions/say",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text})});
+      if(r.status===204){ premiumOK=false; return browserSay(text); }
+      if(!r.ok){ return browserSay(text); }
+      const blob=await r.blob();
+      if(!blob || blob.size<200){ return browserSay(text); }
+      url=URL.createObjectURL(blob); speechCache.set(text,url);
+    }
+    voiceAudio.src=url; voiceAudio.volume=1;
+    duck(true);
+    voiceAudio.onended=()=>duck(false); voiceAudio.onerror=()=>{duck(false);browserSay(text);};
+    await voiceAudio.play();
+  }catch(e){ browserSay(text); }
 }
-function releaseWakeLock(){try{wakeLock?.release()}catch(e){}wakeLock=null}
+function say(text){ if(!soundOn)return; if(premiumOK) premiumSay(text); else browserSay(text); }
+function unlockAudio(){
+  try{ if(navigator.audioSession) navigator.audioSession.type="ambient"; }catch(e){}
+  if("speechSynthesis" in window){ try{const u=new SpeechSynthesisUtterance(" ");u.volume=0.01;window.speechSynthesis.speak(u);}catch(e){} }
+  try{ voiceAudio.play().then(()=>voiceAudio.pause()).catch(()=>{}); }catch(e){}
+}
 
-const library=[
-{name:"Push-ups",cue:"Brace the core. Lower with control.",video:"https://www.pexels.com/download/video/6389834/",fallback:"videos/push_ups.mp4",position:"center 50%"},
-{name:"Jump squats",cue:"Hips back. Jump straight up. Land softly.",video:"videos/jump_squats.mp4",fallback:"videos/jump_squats.mp4",position:"center"},
-{name:"Reverse lunges",cue:"Stay tall. Drive through the front foot.",video:"https://videos.pexels.com/video-files/8456658/8456658-hd_1920_1080_25fps.mp4",fallback:"videos/reverse_lunges.mp4",position:"center 52%"},
-{name:"Burpees",cue:"Hands down, feet back, strong plank, then jump.",video:"https://www.pexels.com/download/video/8858142/",fallback:"videos/burpees.mp4",position:"center 52%"},
-{name:"Mountain climbers",cue:"Shoulders over wrists. Keep the hips steady.",video:"https://www.pexels.com/download/video/6525467/",fallback:"videos/mountain_climbers.mp4",position:"center 54%"},
-{name:"Shoulder taps",cue:"Slow taps. Resist rotation through the hips.",video:"videos/shoulder_taps.mp4",fallback:"videos/shoulder_taps.mp4",position:"center"},
-{name:"Broad jumps",cue:"Swing the arms and own the landing.",video:"videos/broad_jumps.mp4",fallback:"videos/broad_jumps.mp4",position:"center"},
-{name:"Air squats",cue:"Sit back. Keep heels down and chest tall.",video:"https://www.pexels.com/download/video/8859851/",fallback:"videos/air_squats.mp4",position:"center 48%"}
-];
-const order=[0,1,2,4,5,7,3,6,0,2,1,4,5,7,3,6,0,2,1,3];
-const workout=order.map(i=>library[i]);
-const $=id=>document.getElementById(id);let phase="ready",index=0,seconds=WORK,running=false,timerId=null,soundOn=true,currentKey="";
-function fmt(v){return `${Math.floor(v/60)}:${String(v%60).padStart(2,"0")}`}
-function totalLeft(){if(phase==="ready")return TOTAL;if(phase==="complete")return 0;const completed=index*(WORK+REST)+(phase==="rest"?WORK:0);return Math.max(0,TOTAL-completed-((phase==="work"?WORK:REST)-seconds))}
-function playSound(id){if(!soundOn)return;const a=$(id);a.currentTime=0;a.play().catch(()=>{})}
-function safePlay(v=$("video")){const p=v.play();if(p&&p.catch)p.catch(()=>{})}
-function setSource(videoEl,item){videoEl.dataset.fallback=item.fallback||"";videoEl.dataset.failed="0";videoEl.style.objectPosition=item.position||"center";videoEl.src=item.video;videoEl.load()}
-function ensureCurrent(item){const key=item.name+item.video;if(currentKey===key){if(running)safePlay();return}currentKey=key;const media=$("media");media.classList.add("is-switching");setSource($("video"),item);$("video").oncanplay=()=>{media.classList.remove("is-switching");if(running)safePlay()}}
-function preloadNext(item){if(!item)return;setSource($("nextVideo"),item);$("nextVideo").load()}
-function currentExercise(){return workout[Math.min(index,workout.length-1)]}
-function nextExercise(){return workout[Math.min(index+1,workout.length-1)]}
-function buildPlan(){const p=$("plan");p.innerHTML="";workout.forEach((x,i)=>{const row=document.createElement("div");row.className="planItem"+(i===index&&phase!=="complete"?" active":"")+(i<index||phase==="complete"?" done":"");row.innerHTML=`<div class="num">${i+1}</div><div><div class="planName">${x.name}</div><div class="planTiming">40 sec work · 20 sec transition</div></div><div class="planTiming">${fmt(i*60)}</div>`;p.appendChild(row)});const active=p.querySelector(".active");if(active)setTimeout(()=>active.scrollIntoView({block:"center"}),0)}
-function renderDots(){const s=$("roundStrip");s.innerHTML="";workout.forEach((_,i)=>{const d=document.createElement("div");d.className="roundDot"+(i<index?" done":"")+(i===index&&phase!=="complete"?" active":"");s.appendChild(d)})}
-function render(){const complete=phase==="complete";$("workStage").classList.toggle("hidden",complete);$("completeStage").classList.toggle("hidden",!complete);$("badge").textContent=phase.toUpperCase();$("meta").textContent=`${fmt(totalLeft())} left · Round ${Math.min(index+1,20)}/20`;$("pause").disabled=phase==="ready"||complete;$("pause").textContent=running?"Pause":"Resume";$("mainButton").textContent=phase==="ready"?"Start workout":complete?"Restart":"Skip";if(complete){$("video").pause();renderDots();return}const display=phase==="rest"?nextExercise():currentExercise();$("title").textContent=display.name;$("eyebrow").textContent=phase==="ready"?"TODAY'S SESSION":phase==="rest"?"NEXT UP":"MOVE";$("timer").textContent=seconds;$("timer").classList.toggle("urgent",seconds<=5&&phase!=="ready");$("fill").style.width=`${Math.max(0,seconds/(phase==="rest"?REST:WORK))*100}%`;$("cue").textContent=phase==="ready"?"Press start when you're ready.":phase==="rest"?`Recover. ${display.cue}`:display.cue;$("nextLabel").textContent=index>=19?"Final round":`Next: ${nextExercise().name}`;ensureCurrent(display);preloadNext(index<19?nextExercise():null);renderDots()}
-function enterWork(){phase="work";seconds=WORK;render();playSound("goAudio");const x=currentExercise();setTimeout(()=>speakCue(`${x.name}. ${x.cue}`),220)}
-function enterRest(){phase="rest";seconds=REST;render();playSound("restAudio");const x=nextExercise();setTimeout(()=>speakCue(`Recover. Next, ${x.name}.`),220)}
-function complete(){phase="complete";seconds=0;running=false;clearInterval(timerId);timerId=null;render();playSound("goAudio");speakCue("Outstanding. Workout complete.");releaseWakeLock()}
-function advance(){if(phase==="work"){enterRest()}else if(phase==="rest"){if(index>=19)complete();else{index++;enterWork()}}}
-function tick(){if(!running)return;seconds--;if(seconds<=0)advance();else{if(seconds<=3)playSound("tickAudio");render()}}
-function start(){unlockCoachVoice();if(phase==="complete")reset();running=true;requestWakeLock();if(phase==="ready")enterWork();if(timerId===null)timerId=setInterval(tick,1000);safePlay();render()}
-function reset(){running=false;releaseWakeLock();if("speechSynthesis" in window)window.speechSynthesis.cancel();if(timerId!==null)clearInterval(timerId);timerId=null;phase="ready";index=0;seconds=WORK;currentKey="";render()}
-[$("video"),$("nextVideo")].forEach(v=>v.addEventListener("error",()=>{if(v.dataset.failed==="1")return;const fallback=v.dataset.fallback;if(!fallback)return;v.dataset.failed="1";v.src=fallback;v.load();if(v.id==="video"&&running)safePlay(v)}));
-$("mainButton").addEventListener("click",()=>phase==="ready"||phase==="complete"?start():advance());$("pause").addEventListener("click",()=>{if(phase==="ready"||phase==="complete")return;running=!running;if(running){requestWakeLock();safePlay();speakCue("Let's keep moving.")}else{releaseWakeLock();$("video").pause();if("speechSynthesis" in window)window.speechSynthesis.cancel()}render()});$("reset").addEventListener("click",reset);$("soundButton").addEventListener("click",()=>{soundOn=!soundOn;$("soundButton").textContent=soundOn?"Sound on":"Sound off";if(soundOn){unlockCoachVoice();playSound("tickAudio");setTimeout(()=>speakCue("Coach voice on."),180)}else if("speechSynthesis" in window)window.speechSynthesis.cancel()});$("planButton").addEventListener("click",()=>{buildPlan();$("planModal").classList.remove("hidden")});$("closePlan").addEventListener("click",()=>$("planModal").classList.add("hidden"));$("planModal").addEventListener("click",e=>{if(e.target===$("planModal"))$("planModal").classList.add("hidden")});document.addEventListener("keydown",e=>{if(e.key==="Escape")$("planModal").classList.add("hidden")});document.addEventListener("visibilitychange",()=>{if(document.hidden){$("video").pause()}else if(running){requestWakeLock();safePlay()}});window.addEventListener("pagehide",releaseWakeLock);render();
+/* enthusiastic phrasing */
+const HYPE_START=["Let's go!","Here we go!","You've got this!","Time to work!","Let's move!"];
+const HYPE_MID=["Looking strong!","Keep it up!","Stay with it!","You're crushing this!","Halfway hero!","Don't quit now!"];
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+/* ---------- media ---------- */
+function frameURL(id,n){ return CDN+id+"/"+n+".jpg"; }
+function showVideo(item){
+  const v=$("video"), img=$("frame"), media=$("media");
+  clearInterval(frameTimer); frameTimer=null;
+  img.classList.add("hide"); v.classList.remove("hide");
+  media.classList.add("is-switching");
+  v.src=item.video; v.load();
+  v.oncanplay=()=>{ media.classList.remove("is-switching"); if(running)v.play().catch(()=>{}); };
+  v.onerror=()=>media.classList.remove("is-switching");
+}
+function showImage(item){
+  const v=$("video"), img=$("frame"), media=$("media");
+  try{ v.pause(); }catch(e){} v.classList.add("hide"); img.classList.remove("hide");
+  clearInterval(frameTimer); frameTimer=null;
+  media.classList.add("is-switching");
+  const f0=frameURL(item.img,0), f1=frameURL(item.img,1);
+  let toggled=false;
+  img.onerror=()=>{ if(img.src.startsWith(CDN)){ img.onerror=null; img.src=RAW+item.img+"/0.jpg"; } };
+  img.onload=()=>media.classList.remove("is-switching");
+  img.src=f0;
+  const pre=new Image(); pre.src=f1;
+  frameTimer=setInterval(()=>{ if(!running && phase==="work") return; toggled=!toggled; img.src=toggled?f1:f0; }, 900);
+}
+function renderMedia(item){
+  const key=item.name;
+  if(currentKey===key){ if(item.video && running) $("video").play().catch(()=>{}); return; }
+  currentKey=key;
+  if(item.video) showVideo(item); else showImage(item);
+}
+
+/* ---------- engine ---------- */
+function totalLeft(){
+  if(phase==="menu")return TOTAL; if(phase==="complete")return 0;
+  const per=WORK+REST; const completed=index*per+(phase==="rest"?WORK:0);
+  return Math.max(0,TOTAL-completed-((phase==="work"?WORK:REST)-seconds));
+}
+function cur(){ return plan.list[Math.min(index,plan.list.length-1)]; }
+function nxt(){ return plan.list[Math.min(index+1,plan.list.length-1)]; }
+function renderDots(){ const s=$("roundStrip"); s.innerHTML=""; plan.list.forEach((_,i)=>{const el=document.createElement("div");el.className="roundDot"+(i<index?" done":"")+(i===index&&phase!=="complete"?" active":"");s.appendChild(el)}); }
+function buildPlanSheet(){
+  const p=$("plan"); p.innerHTML="";
+  plan.list.forEach((x,i)=>{ const row=document.createElement("div");
+    row.className="planItem"+(i===index&&phase!=="complete"?" active":"")+(i<index||phase==="complete"?" done":"");
+    row.innerHTML=`<div class="num">${i+1}</div><div><div class="planName">${x.name}</div><div class="planTiming">${plan.work}s work · ${plan.rest}s rest</div></div><div class="planTiming">${fmt(i*(plan.work+plan.rest))}</div>`;
+    p.appendChild(row); });
+  const a=p.querySelector(".active"); if(a)setTimeout(()=>a.scrollIntoView({block:"center"}),0);
+  $("planSub").textContent=`${plan.label} · ${plan.list.length} rounds · ${fmt(TOTAL)}`;
+}
+function render(){
+  const complete=phase==="complete";
+  $("workStage").classList.toggle("hidden",complete||phase==="menu");
+  $("completeStage").classList.toggle("hidden",!complete);
+  $("badge").textContent=phase==="menu"?"READY":phase.toUpperCase();
+  $("meta").textContent=`${fmt(totalLeft())} left · ${Math.min(index+1,ROUNDS)}/${ROUNDS}`;
+  $("pause").disabled=phase==="menu"||complete; $("pause").textContent=running?"Pause":"Resume";
+  $("mainButton").textContent=complete?"Menu":(phase==="menu"?"Start":"Skip");
+  if(complete){ try{$("video").pause();}catch(e){} clearInterval(frameTimer); renderDots(); return; }
+  const disp=phase==="rest"?nxt():cur();
+  $("title").textContent=disp.name;
+  $("eyebrow").textContent=phase==="rest"?"NEXT UP":"MOVE";
+  $("timer").textContent=seconds; $("timer").classList.toggle("urgent",seconds<=5);
+  $("fill").style.width=`${Math.max(0,seconds/(phase==="rest"?REST:WORK))*100}%`;
+  $("cue").textContent=phase==="rest"?`Recover. ${disp.cue}`:disp.cue;
+  $("nextLabel").textContent=index>=ROUNDS-1?"Final round":`Next: ${nxt().name}`;
+  renderMedia(disp);
+  renderDots();
+}
+function enterWork(){ phase="work"; seconds=WORK; render(); playSound("goAudio"); const x=cur();
+  setTimeout(()=>say(index===0?`${pick(HYPE_START)} First up, ${x.name}. ${x.cue}`:`${x.name}. ${x.cue}`),240); }
+function enterRest(){ phase="rest"; seconds=REST; render(); playSound("restAudio"); const x=nxt();
+  const mid=(index>0 && index%4===0)? pick(HYPE_MID)+" ":""; setTimeout(()=>say(`${mid}Recover. Next up, ${x.name}.`),240); }
+function finish(){ phase="complete"; seconds=0; running=false; clearInterval(timerId); timerId=null; clearInterval(frameTimer);
+  $("completeMeta").textContent=`${plan.label} · ${ROUNDS} rounds · ${fmt(TOTAL)} done.`; render(); playSound("goAudio"); say("Outstanding! Workout complete. Be proud of that."); releaseWake(); }
+function advance(){ if(phase==="work"){enterRest();} else if(phase==="rest"){ if(index>=ROUNDS-1)finish(); else{index++;enterWork();} } }
+function tick(){ if(!running)return; seconds--; if(seconds<=0)advance(); else { if(seconds<=3)playSound("tickAudio"); render(); } }
+
+/* ---------- wake lock ---------- */
+let wake=null;
+async function reqWake(){ if(!running||!("wakeLock" in navigator))return; try{wake=await navigator.wakeLock.request("screen");wake.addEventListener("release",()=>wake=null);}catch(e){} }
+function releaseWake(){ try{wake?.release();}catch(e){} wake=null; }
+
+/* ---------- controls ---------- */
+function startWorkout(){ unlockAudio(); running=true; reqWake(); if(phase!=="work"&&phase!=="rest")enterWork(); if(timerId===null)timerId=setInterval(tick,1000);
+  $("menuStage").classList.add("hidden"); $("controls").classList.remove("hidden"); $("badge").classList.remove("hidden"); $("meta").classList.remove("hidden");
+  const v=$("video"); if(cur().video)v.play().catch(()=>{}); render(); }
+function toMenu(){ running=false; releaseWake(); if("speechSynthesis" in window)window.speechSynthesis.cancel(); try{voiceAudio.pause();}catch(e){}
+  if(timerId!==null)clearInterval(timerId); timerId=null; clearInterval(frameTimer);
+  phase="menu"; index=0; currentKey="";
+  $("menuStage").classList.remove("hidden"); $("workStage").classList.add("hidden"); $("completeStage").classList.add("hidden");
+  $("controls").classList.add("hidden"); $("badge").classList.add("hidden"); $("meta").classList.add("hidden"); updatePreview(); }
+
+/* ---------- menu wiring ---------- */
+function updatePreview(){ const f=parseFocus($("focusInput").value); const p=generate(selDiff,f);
+  $("planPreview").textContent=`${DIFF[selDiff].label} · ${p.list.length} rounds · ~${Math.round((p.work+p.rest)*p.list.length/60)} min`; }
+$("diffGrid").addEventListener("click",e=>{ const c=e.target.closest(".diffCard"); if(!c)return; selDiff=c.dataset.diff;
+  [...$("diffGrid").children].forEach(x=>x.classList.toggle("sel",x===c)); updatePreview(); });
+$("chips").addEventListener("click",e=>{ const c=e.target.closest(".chip"); if(!c)return; const val=c.dataset.focus;
+  const cur=$("focusInput").value.trim();
+  if(val==="full"){ $("focusInput").value="full body"; [...$("chips").children].forEach(x=>x.classList.toggle("on",x===c)); }
+  else { c.classList.toggle("on"); const on=[...$("chips").children].filter(x=>x.classList.contains("on")&&x.dataset.focus!=="full").map(x=>x.textContent); $("focusInput").value=on.join(", "); }
+  updatePreview(); });
+$("focusInput").addEventListener("input",()=>{ [...$("chips").children].forEach(x=>x.classList.remove("on")); updatePreview(); });
+$("buildBtn").addEventListener("click",()=>{ const f=parseFocus($("focusInput").value); plan=generate(selDiff,f);
+  WORK=plan.work; REST=plan.rest; ROUNDS=plan.list.length; TOTAL=ROUNDS*(WORK+REST); index=0; seconds=WORK; phase="ready"; currentKey="";
+  buildPlanSheet(); unlockAudio(); startWorkout(); });
+$("againBtn").addEventListener("click",toMenu);
+
+$("mainButton").addEventListener("click",()=>{ if(phase==="complete"){toMenu();return;} if(phase==="menu")return; advance(); });
+$("pause").addEventListener("click",()=>{ if(phase==="menu"||phase==="complete")return; running=!running;
+  if(running){ reqWake(); if(cur().video)$("video").play().catch(()=>{}); say(pick(["Back to it!","Let's keep moving!","Here we go!"])); }
+  else { releaseWake(); try{$("video").pause();}catch(e){} if("speechSynthesis" in window)window.speechSynthesis.cancel(); try{voiceAudio.pause();}catch(e){} }
+  render(); });
+$("reset").addEventListener("click",toMenu);
+$("soundButton").addEventListener("click",()=>{ soundOn=!soundOn; $("soundButton").textContent=soundOn?"Sound on":"Sound off";
+  if(soundOn){ unlockAudio(); setTimeout(()=>say("Coach voice on. Let's do this!"),120); } else { if("speechSynthesis" in window)window.speechSynthesis.cancel(); try{voiceAudio.pause();}catch(e){} } });
+$("planButton").addEventListener("click",()=>{ if(phase==="menu"||!plan)return; buildPlanSheet(); $("planModal").classList.remove("hidden"); });
+$("closePlan").addEventListener("click",()=>$("planModal").classList.add("hidden"));
+$("planModal").addEventListener("click",e=>{ if(e.target===$("planModal"))$("planModal").classList.add("hidden"); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape")$("planModal").classList.add("hidden"); });
+document.addEventListener("visibilitychange",()=>{ if(document.hidden){ try{$("video").pause();}catch(e){} } else if(running && cur().video){ reqWake(); $("video").play().catch(()=>{}); } });
+window.addEventListener("pagehide",releaseWake);
+
+updatePreview();
 </script>
 </body>
 </html>
