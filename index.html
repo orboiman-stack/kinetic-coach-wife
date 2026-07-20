@@ -96,6 +96,14 @@ header{display:flex;justify-content:space-between;align-items:center;min-height:
       <button class="diffCard" data-diff="hard" type="button"><div class="dt">Hard</div><div class="dd">High intensity · plyo · ~18 min</div></button>
     </div>
   </div>
+  <div>
+    <div class="section-label">EQUIPMENT</div>
+    <div class="diffGrid" id="equipGrid">
+      <button class="diffCard sel" data-equip="none" type="button"><div class="dt">None</div><div class="dd">Bodyweight only</div></button>
+      <button class="diffCard" data-equip="dumbbell" type="button"><div class="dt">Dumbbells</div><div class="dd">Home dumbbells</div></button>
+      <button class="diffCard" data-equip="gym" type="button"><div class="dt">Gym</div><div class="dd">Full equipment</div></button>
+    </div>
+  </div>
   <div class="focusWrap">
     <div class="section-label">FOCUS (OPTIONAL)</div>
     <input class="focusInput" id="focusInput" type="text" placeholder="e.g. core and glutes, upper body, cardio…" autocomplete="off">
@@ -106,6 +114,7 @@ header{display:flex;justify-content:space-between;align-items:center;min-height:
       <button class="chip" data-focus="upper" type="button">Upper body</button>
       <button class="chip" data-focus="cardio" type="button">Cardio</button>
       <button class="chip" data-focus="full" type="button">Full body</button>
+      <button class="chip" data-focus="volleyball" type="button">Volleyball</button>
     </div>
   </div>
   <button class="startBtn" id="buildBtn" type="button">Build my workout</button>
@@ -145,51 +154,77 @@ header{display:flex;justify-content:space-between;align-items:center;min-height:
 <script>
 /* ---------- exercise library (tagged) ---------- */
 const LIBRARY = [
-{name:"Push-ups",cue:"Brace the core, lower with control, press strong.",level:"beginner",impact:"low",focus:["upper","core"],video:"videos/push_ups.mp4"},
-{name:"Jump squats",cue:"Hips back, jump straight up, land soft.",level:"intermediate",impact:"high",focus:["legs","glutes","cardio"],video:"videos/jump_squats.mp4"},
-{name:"Reverse lunges",cue:"Stay tall, drive through the front foot.",level:"beginner",impact:"low",focus:["legs","glutes"],video:"videos/reverse_lunges.mp4"},
-{name:"Burpees",cue:"Hands down, feet back, plank, then jump.",level:"intermediate",impact:"high",focus:["cardio","legs","upper"],video:"videos/burpees.mp4"},
-{name:"Mountain climbers",cue:"Shoulders over wrists, drive the knees, steady hips.",level:"beginner",impact:"high",focus:["core","cardio"],video:"videos/mountain_climbers.mp4"},
-{name:"Shoulder taps",cue:"Slow taps, resist the rotation, tight core.",level:"beginner",impact:"low",focus:["core","upper"],video:"videos/shoulder_taps.mp4"},
-{name:"Broad jumps",cue:"Swing the arms, jump far, own the landing.",level:"intermediate",impact:"high",focus:["legs","cardio"],video:"videos/broad_jumps.mp4"},
-{name:"Air squats",cue:"Sit back, heels down, chest tall, drive up.",level:"beginner",impact:"low",focus:["legs","glutes"],video:"videos/air_squats.mp4"},
-{name:"Wide push-ups",cue:"Chest proud, elbows track back, control the lower.",level:"beginner",impact:"low",focus:["upper","core"],img:"Push-Up_Wide"},
-{name:"Decline push-ups",cue:"Feet up, core tight, press the floor away.",level:"beginner",impact:"low",focus:["upper"],img:"Decline_Push-Up"},
-{name:"Incline push-ups",cue:"Hands elevated, smooth reps, full lockout.",level:"beginner",impact:"low",focus:["upper"],img:"Incline_Push-Up"},
-{name:"Plyo push-ups",cue:"Explode off the floor, land soft, reset fast.",level:"beginner",impact:"high",focus:["upper","cardio"],img:"Plyo_Push-up"},
-{name:"Close-grip push-ups",cue:"Elbows tucked, squeeze the triceps at the top.",level:"intermediate",impact:"low",focus:["upper"],img:"Push-Ups_-_Close_Triceps_Position"},
-{name:"Clock push-ups",cue:"Walk the hands around, own every angle.",level:"intermediate",impact:"low",focus:["upper"],img:"Clock_Push-Up"},
-{name:"Bench dips",cue:"Chest up, dip to ninety, drive through the palms.",level:"beginner",impact:"low",focus:["upper"],img:"Bench_Dips"},
-{name:"Plank ups",cue:"Plank to press, control the lower every rep.",level:"intermediate",impact:"low",focus:["core","upper"],img:"Body-Up"},
-{name:"Bodyweight squats",cue:"Sit back, knees out, chest tall, drive up.",level:"beginner",impact:"low",focus:["glutes","legs"],img:"Bodyweight_Squat"},
-{name:"Freehand jump squats",cue:"Load the hips, jump big, land soft and quiet.",level:"intermediate",impact:"high",focus:["glutes","legs"],img:"Freehand_Jump_Squat"},
-{name:"Walking lunges",cue:"Long steps, front heel down, stay tall.",level:"beginner",impact:"low",focus:["glutes","legs"],img:"Bodyweight_Walking_Lunge"},
-{name:"Box jumps",cue:"Explode up, soft landing, control the step down.",level:"intermediate",impact:"high",focus:["glutes","legs","cardio"],img:"Bench_Jump"},
-{name:"Frog hops",cue:"Stay low, spring forward, reset every jump.",level:"intermediate",impact:"high",focus:["glutes","legs"],img:"Frog_Hops"},
-{name:"Lateral bounds",cue:"Bound side to side, stick each landing.",level:"beginner",impact:"high",focus:["glutes","legs","cardio"],img:"Alternate_Leg_Diagonal_Bound"},
-{name:"Fast skipping",cue:"Light on the toes, quick feet, drive the knees.",level:"beginner",impact:"high",focus:["legs","cardio"],img:"Fast_Skipping"},
-{name:"Butt kicks",cue:"Snap the heels up, fast turnover, stay springy.",level:"beginner",impact:"high",focus:["legs","cardio"],img:"Double_Leg_Butt_Kick"},
-{name:"Tuck jumps",cue:"Explode up, knees to chest, land soft.",level:"beginner",impact:"high",focus:["legs","cardio"],img:"Knee_Tuck_Jump"},
-{name:"Glute bridges",cue:"Squeeze the glutes, drive the hips sky-high.",level:"beginner",impact:"low",focus:["glutes"],img:"Butt_Lift_Bridge"},
-{name:"Single-leg bridges",cue:"One leg, full hip lift, control the drop.",level:"beginner",impact:"low",focus:["glutes"],img:"Single_Leg_Glute_Bridge"},
-{name:"Glute kickbacks",cue:"Drive the heel back, squeeze at the top.",level:"beginner",impact:"low",focus:["glutes"],img:"Glute_Kickback"},
-{name:"Step-up knee drives",cue:"Drive through the lead leg, punch the knee up.",level:"beginner",impact:"low",focus:["glutes","legs"],img:"Step-up_with_Knee_Raise"},
-{name:"Lying leg lifts",cue:"Legs straight, lower slow, keep the low back down.",level:"beginner",impact:"low",focus:["core"],img:"Leg_Lift"},
-{name:"Bicycle crunches",cue:"Elbow to knee, twist through the core, breathe.",level:"beginner",impact:"low",focus:["core"],img:"Air_Bike"},
-{name:"Crunches",cue:"Ribs to hips, chin off the chest, control down.",level:"beginner",impact:"low",focus:["core"],img:"Crunches"},
-{name:"Cross-body crunches",cue:"Reach across, squeeze the obliques, slow return.",level:"beginner",impact:"low",focus:["core"],img:"Cross-Body_Crunch"},
-{name:"Flutter kicks",cue:"Small fast kicks, low back down, core braced.",level:"beginner",impact:"low",focus:["core"],img:"Flutter_Kicks"},
-{name:"Hip raises",cue:"Curl the hips up, control the lower every time.",level:"beginner",impact:"low",focus:["core"],img:"Bent-Knee_Hip_Raise"},
-{name:"Dead bugs",cue:"Opposite arm and leg, slow and steady, ribs down.",level:"beginner",impact:"low",focus:["core"],img:"Dead_Bug"},
-{name:"Cocoons",cue:"Curl in tight, extend long, keep the core loaded.",level:"beginner",impact:"low",focus:["core"],img:"Cocoons"},
-{name:"Pike ups",cue:"Forearms down, pike the hips up, feel the abs.",level:"beginner",impact:"low",focus:["core"],img:"Butt-Ups"},
-{name:"Sit-ups",cue:"Drive up strong, only three-quarters down, repeat.",level:"beginner",impact:"low",focus:["core"],img:"3_4_Sit-Up"},
-{name:"Heel touches",cue:"Side to side, tap the heels, squeeze the sides.",level:"beginner",impact:"low",focus:["core"],img:"Alternate_Heel_Touchers"},
-{name:"Inchworms",cue:"Walk out to plank, walk back, keep legs long.",level:"beginner",impact:"low",focus:["legs","core"],img:"Inchworm"},
-{name:"Supermans",cue:"Lift chest and legs, squeeze the back, hold a beat.",level:"beginner",impact:"low",focus:["core","glutes"],img:"Superman"},
-{name:"Back extensions",cue:"Lift the chest, squeeze the low back, control down.",level:"intermediate",impact:"low",focus:["core","glutes"],img:"Hyperextensions_With_No_Hyperextension_Bench"},
-{name:"Pike push-ups",cue:"Hips high, lower the crown, press overhead.",level:"expert",impact:"low",focus:["upper"],img:"Handstand_Push-Ups"},
-{name:"Tricep dips",cue:"Chest tall, dip deep, drive to lockout.",level:"beginner",impact:"low",focus:["upper"],img:"Dips_-_Triceps_Version"}
+{name:"Push-ups",cue:"Brace the core, lower with control, press strong.",level:"beginner",impact:"low",focus:["upper", "core"],equip:"none",video:"videos/push_ups.mp4",vb:true},
+{name:"Jump squats",cue:"Hips back, jump straight up, land soft.",level:"intermediate",impact:"high",focus:["legs", "glutes", "cardio"],equip:"none",video:"videos/jump_squats.mp4",vb:true},
+{name:"Reverse lunges",cue:"Stay tall, drive through the front foot.",level:"beginner",impact:"low",focus:["legs", "glutes"],equip:"none",video:"videos/reverse_lunges.mp4",vb:true},
+{name:"Burpees",cue:"Hands down, feet back, plank, then jump.",level:"intermediate",impact:"high",focus:["cardio", "legs", "upper"],equip:"none",video:"videos/burpees.mp4",vb:true},
+{name:"Mountain climbers",cue:"Shoulders over wrists, drive the knees, steady hips.",level:"beginner",impact:"high",focus:["core", "cardio"],equip:"none",video:"videos/mountain_climbers.mp4",vb:true},
+{name:"Shoulder taps",cue:"Slow taps, resist the rotation, tight core.",level:"beginner",impact:"low",focus:["core", "upper"],equip:"none",video:"videos/shoulder_taps.mp4",vb:true},
+{name:"Broad jumps",cue:"Swing the arms, jump far, own the landing.",level:"intermediate",impact:"high",focus:["legs", "cardio"],equip:"none",video:"videos/broad_jumps.mp4",vb:true},
+{name:"Air squats",cue:"Sit back, heels down, chest tall, drive up.",level:"beginner",impact:"low",focus:["legs", "glutes"],equip:"none",video:"videos/air_squats.mp4",vb:true},
+{name:"Wide push-ups",cue:"Chest proud, elbows track back, control the lower.",level:"beginner",impact:"low",focus:["upper", "core"],equip:"none",img:"Push-Up_Wide",vb:true},
+{name:"Decline push-ups",cue:"Feet up, core tight, press the floor away.",level:"beginner",impact:"low",focus:["upper"],equip:"none",img:"Decline_Push-Up"},
+{name:"Incline push-ups",cue:"Hands elevated, smooth reps, full lockout.",level:"beginner",impact:"low",focus:["upper"],equip:"none",img:"Incline_Push-Up"},
+{name:"Plyo push-ups",cue:"Explode off the floor, land soft, reset fast.",level:"beginner",impact:"high",focus:["upper", "cardio"],equip:"none",img:"Plyo_Push-up",vb:true},
+{name:"Close-grip push-ups",cue:"Elbows tucked, squeeze the triceps at the top.",level:"intermediate",impact:"low",focus:["upper"],equip:"none",img:"Push-Ups_-_Close_Triceps_Position"},
+{name:"Clock push-ups",cue:"Walk the hands around, own every angle.",level:"intermediate",impact:"low",focus:["upper"],equip:"none",img:"Clock_Push-Up"},
+{name:"Bench dips",cue:"Chest up, dip to ninety, drive through the palms.",level:"beginner",impact:"low",focus:["upper"],equip:"none",img:"Bench_Dips"},
+{name:"Plank ups",cue:"Plank to press, control the lower every rep.",level:"intermediate",impact:"low",focus:["core", "upper"],equip:"none",img:"Body-Up",vb:true},
+{name:"Bodyweight squats",cue:"Sit back, knees out, chest tall, drive up.",level:"beginner",impact:"low",focus:["glutes", "legs"],equip:"none",img:"Bodyweight_Squat",vb:true},
+{name:"Freehand jump squats",cue:"Load the hips, jump big, land soft and quiet.",level:"intermediate",impact:"high",focus:["glutes", "legs"],equip:"none",img:"Freehand_Jump_Squat",vb:true},
+{name:"Walking lunges",cue:"Long steps, front heel down, stay tall.",level:"beginner",impact:"low",focus:["glutes", "legs"],equip:"none",img:"Bodyweight_Walking_Lunge",vb:true},
+{name:"Box jumps",cue:"Explode up, soft landing, control the step down.",level:"intermediate",impact:"high",focus:["glutes", "legs", "cardio"],equip:"none",img:"Bench_Jump",vb:true},
+{name:"Frog hops",cue:"Stay low, spring forward, reset every jump.",level:"intermediate",impact:"high",focus:["glutes", "legs"],equip:"none",img:"Frog_Hops",vb:true},
+{name:"Lateral bounds",cue:"Bound side to side, stick each landing.",level:"beginner",impact:"high",focus:["glutes", "legs", "cardio"],equip:"none",img:"Alternate_Leg_Diagonal_Bound",vb:true},
+{name:"Fast skipping",cue:"Light on the toes, quick feet, drive the knees.",level:"beginner",impact:"high",focus:["legs", "cardio"],equip:"none",img:"Fast_Skipping",vb:true},
+{name:"Butt kicks",cue:"Snap the heels up, fast turnover, stay springy.",level:"beginner",impact:"high",focus:["legs", "cardio"],equip:"none",img:"Double_Leg_Butt_Kick",vb:true},
+{name:"Tuck jumps",cue:"Explode up, knees to chest, land soft.",level:"beginner",impact:"high",focus:["legs", "cardio"],equip:"none",img:"Knee_Tuck_Jump",vb:true},
+{name:"Glute bridges",cue:"Squeeze the glutes, drive the hips sky-high.",level:"beginner",impact:"low",focus:["glutes"],equip:"none",img:"Butt_Lift_Bridge"},
+{name:"Single-leg bridges",cue:"One leg, full hip lift, control the drop.",level:"beginner",impact:"low",focus:["glutes"],equip:"none",img:"Single_Leg_Glute_Bridge"},
+{name:"Glute kickbacks",cue:"Drive the heel back, squeeze at the top.",level:"beginner",impact:"low",focus:["glutes"],equip:"none",img:"Glute_Kickback"},
+{name:"Step-up knee drives",cue:"Drive through the lead leg, punch the knee up.",level:"beginner",impact:"low",focus:["glutes", "legs"],equip:"none",img:"Step-up_with_Knee_Raise"},
+{name:"Lying leg lifts",cue:"Legs straight, lower slow, keep the low back down.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Leg_Lift"},
+{name:"Bicycle crunches",cue:"Elbow to knee, twist through the core, breathe.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Air_Bike",vb:true},
+{name:"Crunches",cue:"Ribs to hips, chin off the chest, control down.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Crunches"},
+{name:"Cross-body crunches",cue:"Reach across, squeeze the obliques, slow return.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Cross-Body_Crunch"},
+{name:"Flutter kicks",cue:"Small fast kicks, low back down, core braced.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Flutter_Kicks"},
+{name:"Hip raises",cue:"Curl the hips up, control the lower every time.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Bent-Knee_Hip_Raise"},
+{name:"Dead bugs",cue:"Opposite arm and leg, slow and steady, ribs down.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Dead_Bug",vb:true},
+{name:"Cocoons",cue:"Curl in tight, extend long, keep the core loaded.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Cocoons"},
+{name:"Pike ups",cue:"Forearms down, pike the hips up, feel the abs.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Butt-Ups"},
+{name:"Sit-ups",cue:"Drive up strong, only three-quarters down, repeat.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"3_4_Sit-Up"},
+{name:"Heel touches",cue:"Side to side, tap the heels, squeeze the sides.",level:"beginner",impact:"low",focus:["core"],equip:"none",img:"Alternate_Heel_Touchers"},
+{name:"Inchworms",cue:"Walk out to plank, walk back, keep legs long.",level:"beginner",impact:"low",focus:["legs", "core"],equip:"none",img:"Inchworm"},
+{name:"Supermans",cue:"Lift chest and legs, squeeze the back, hold a beat.",level:"beginner",impact:"low",focus:["core", "glutes"],equip:"none",img:"Superman",vb:true},
+{name:"Back extensions",cue:"Lift the chest, squeeze the low back, control down.",level:"intermediate",impact:"low",focus:["core", "glutes"],equip:"none",img:"Hyperextensions_With_No_Hyperextension_Bench"},
+{name:"Pike push-ups",cue:"Hips high, lower the crown, press overhead.",level:"expert",impact:"low",focus:["upper"],equip:"none",img:"Handstand_Push-Ups",vb:true},
+{name:"Tricep dips",cue:"Chest tall, dip deep, drive to lockout.",level:"beginner",impact:"low",focus:["upper"],equip:"none",img:"Dips_-_Triceps_Version"},
+{name:"Dumbbell squats",cue:"Weights at your sides, sit back, drive up tall.",level:"beginner",impact:"low",focus:["legs", "glutes"],equip:"dumbbell",img:"Dumbbell_Squat"},
+{name:"Goblet squats",cue:"Hug the bell, elbows inside the knees, stand strong.",level:"beginner",impact:"low",focus:["legs", "glutes"],equip:"dumbbell",img:"Goblet_Squat"},
+{name:"Dumbbell lunges",cue:"Long step, drop the back knee, drive up.",level:"beginner",impact:"low",focus:["legs", "glutes"],equip:"dumbbell",img:"Dumbbell_Lunges"},
+{name:"Dumbbell bench press",cue:"Press to the sky, control the lower, squeeze.",level:"beginner",impact:"low",focus:["upper"],equip:"dumbbell",img:"Dumbbell_Bench_Press"},
+{name:"Dumbbell flyes",cue:"Soft elbows, open wide, squeeze the chest.",level:"beginner",impact:"low",focus:["upper"],equip:"dumbbell",img:"Dumbbell_Flyes"},
+{name:"Seated shoulder press",cue:"Press overhead, ribs down, control the lower.",level:"beginner",impact:"low",focus:["upper"],equip:"dumbbell",img:"Seated_Dumbbell_Press",vb:true},
+{name:"Lateral raises",cue:"Lead with the elbows, raise to shoulder height.",level:"beginner",impact:"low",focus:["upper"],equip:"dumbbell",img:"Side_Lateral_Raise",vb:true},
+{name:"Dumbbell rows",cue:"Flat back, row to the ribs, squeeze the blades.",level:"beginner",impact:"low",focus:["upper"],equip:"dumbbell",img:"Bent_Over_Two-Dumbbell_Row"},
+{name:"Bicep curls",cue:"Elbows pinned, curl up, lower slow.",level:"beginner",impact:"low",focus:["upper"],equip:"dumbbell",img:"Dumbbell_Bicep_Curl"},
+{name:"Overhead tricep extension",cue:"Elbows high, extend overhead, control down.",level:"beginner",impact:"low",focus:["upper"],equip:"dumbbell",img:"Standing_Dumbbell_Triceps_Extension"},
+{name:"Dumbbell RDL",cue:"Hinge at the hips, flat back, squeeze the glutes.",level:"beginner",impact:"low",focus:["legs", "glutes"],equip:"dumbbell",img:"Stiff-Legged_Dumbbell_Deadlift"},
+{name:"Dumbbell step-ups",cue:"Drive through the top leg, stand tall, control down.",level:"intermediate",impact:"low",focus:["legs", "glutes"],equip:"dumbbell",img:"Dumbbell_Step_Ups",vb:true},
+{name:"Dumbbell shoulder press",cue:"Press strong overhead, brace the core.",level:"intermediate",impact:"low",focus:["upper"],equip:"dumbbell",img:"Dumbbell_Shoulder_Press",vb:true},
+{name:"Barbell squats",cue:"Bar tight, sit back, drive the floor away.",level:"beginner",impact:"low",focus:["legs", "glutes"],equip:"gym",img:"Barbell_Squat"},
+{name:"Barbell bench press",cue:"Bar to the chest, drive to lockout.",level:"beginner",impact:"low",focus:["upper"],equip:"gym",img:"Barbell_Bench_Press_-_Medium_Grip"},
+{name:"Deadlifts",cue:"Flat back, push the floor, stand tall.",level:"intermediate",impact:"low",focus:["legs", "glutes", "core"],equip:"gym",img:"Barbell_Deadlift"},
+{name:"Barbell rows",cue:"Hinge over, row to the belt, squeeze.",level:"beginner",impact:"low",focus:["upper"],equip:"gym",img:"Bent_Over_Barbell_Row"},
+{name:"Lat pulldown",cue:"Pull to the chest, drive the elbows down.",level:"beginner",impact:"low",focus:["upper"],equip:"gym",img:"Wide-Grip_Lat_Pulldown"},
+{name:"Leg press",cue:"Full range, push through the heels, control down.",level:"beginner",impact:"low",focus:["legs", "glutes"],equip:"gym",img:"Leg_Press"},
+{name:"Seated cable rows",cue:"Tall chest, pull to the waist, squeeze the back.",level:"beginner",impact:"low",focus:["upper"],equip:"gym",img:"Seated_Cable_Rows"},
+{name:"Overhead press",cue:"Press overhead, brace hard, lower with control.",level:"beginner",impact:"low",focus:["upper"],equip:"gym",img:"Standing_Military_Press",vb:true},
+{name:"Cable crossover",cue:"Slight bend, squeeze across the chest.",level:"beginner",impact:"low",focus:["upper"],equip:"gym",img:"Cable_Crossover"},
+{name:"Leg extensions",cue:"Squeeze the quads at the top, control down.",level:"beginner",impact:"low",focus:["legs"],equip:"gym",img:"Leg_Extensions"},
+{name:"Leg curls",cue:"Curl the heels, squeeze the hamstrings.",level:"beginner",impact:"low",focus:["legs"],equip:"gym",img:"Lying_Leg_Curls"},
+{name:"Barbell lunges",cue:"Long stride, drop and drive.",level:"intermediate",impact:"low",focus:["legs", "glutes"],equip:"gym",img:"Barbell_Lunge"},
+{name:"Calf raises",cue:"Rise onto the toes, squeeze, slow down.",level:"beginner",impact:"low",focus:["legs"],equip:"gym",img:"Standing_Barbell_Calf_Raise"}
 ];
 const CDN="https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/";
 const RAW="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/";
@@ -208,25 +243,35 @@ const FOCUS_WORDS={
   glutes:["glute","glutes","butt","booty","bum","hip"],
   upper:["upper","arm","arms","chest","push","shoulder","back","tricep","bicep","press"],
   cardio:["cardio","hiit","conditioning","heart","sweat","endurance","fat"],
-  full:["full","total","whole","everything","all over","general","body"]
+  full:["full","total","whole","everything","all over","general","entire"],
+  volleyball:["volleyball","vball","v-ball","volley"]
 };
 function parseFocus(text){
   const t=(text||"").toLowerCase();
   const set=new Set();
   for(const key in FOCUS_WORDS){ if(FOCUS_WORDS[key].some(w=>t.includes(w))) set.add(key); }
+  if(set.has("volleyball")) return ["volleyball"];
   if(set.has("full")){ return null; } // full body = everything
   return set.size? [...set] : null;
 }
 
 /* ---------- workout generation ---------- */
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function generate(diffKey, focusKeys){
+function generate(diffKey, focusKeys, equipKey){
   const d=DIFF[diffKey];
   let pool=LIBRARY.filter(e=>d.levels.includes(e.level));
   if(!d.allowHigh) pool=pool.filter(e=>e.impact==="low");
-  // focus filter
+  // equipment filter
+  if(equipKey==="none") pool=pool.filter(e=>e.equip==="none");
+  else if(equipKey==="dumbbell") pool=pool.filter(e=>e.equip==="none"||e.equip==="dumbbell");
+  // gym = everything
   let focused=pool;
-  if(focusKeys && focusKeys.length){
+  const isVB = focusKeys && focusKeys.length===1 && focusKeys[0]==="volleyball";
+  if(isVB){
+    focused=pool.filter(e=>e.vb);
+    if(focused.length<5){ focused=LIBRARY.filter(e=>e.vb && (d.allowHigh||e.impact==="low") && (equipKey==="gym"||e.equip==="none"||(equipKey==="dumbbell"&&e.equip!=="gym"))); }
+    if(focused.length<5) focused=LIBRARY.filter(e=>e.vb);
+  } else if(focusKeys && focusKeys.length){
     const wanted=new Set(focusKeys);
     focused=pool.filter(e=>e.focus.some(f=>wanted.has(f)));
     if(focused.length<5) focused=pool; // relax if too narrow
@@ -252,7 +297,7 @@ function generate(diffKey, focusKeys){
 /* ---------- state ---------- */
 let plan=null, WORK=40, REST=20, TOTAL=0, ROUNDS=0;
 let phase="menu", index=0, seconds=40, running=false, timerId=null, soundOn=true, currentKey="", frameTimer=null;
-let selDiff="medium";
+let selDiff="medium", selEquip="none";
 const $=id=>document.getElementById(id);
 const fmt=v=>`${Math.floor(v/60)}:${String(Math.max(0,v)%60).padStart(2,"0")}`;
 
@@ -312,6 +357,8 @@ function unlockAudio(){
 /* enthusiastic phrasing */
 const HYPE_START=["Let's go!","Here we go!","You've got this!","Time to work!","Let's move!"];
 const HYPE_MID=["Looking strong!","Keep it up!","Stay with it!","You're crushing this!","Halfway hero!","Don't quit now!"];
+const SUPPORT=["You're doing amazing.","Breathe and stay strong.","Every rep counts.","So proud of you.","Keep that form tight.","You're tougher than this.","Nearly there, stay with it.","Beautiful work, keep going.","Strong and steady, you've got this.","Look at you go."];
+let noteThisRound=false, noteGap=2, sinceNote=0;
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 
 /* ---------- media ---------- */
@@ -383,13 +430,16 @@ function render(){
   renderDots();
 }
 function enterWork(){ phase="work"; seconds=WORK; render(); playSound("goAudio"); const x=cur();
+  if(index>0){ sinceNote++; if(sinceNote>=noteGap){ noteThisRound=true; sinceNote=0; noteGap=2+Math.floor(Math.random()*2); } else noteThisRound=false; } else noteThisRound=false;
   setTimeout(()=>say(index===0?`${pick(HYPE_START)} First up, ${x.name}. ${x.cue}`:`${x.name}. ${x.cue}`),240); }
 function enterRest(){ phase="rest"; seconds=REST; render(); playSound("restAudio"); const x=nxt();
   const mid=(index>0 && index%4===0)? pick(HYPE_MID)+" ":""; setTimeout(()=>say(`${mid}Recover. Next up, ${x.name}.`),240); }
 function finish(){ phase="complete"; seconds=0; running=false; clearInterval(timerId); timerId=null; clearInterval(frameTimer);
   $("completeMeta").textContent=`${plan.label} · ${ROUNDS} rounds · ${fmt(TOTAL)} done.`; render(); playSound("goAudio"); say("Outstanding! Workout complete. Be proud of that."); releaseWake(); }
 function advance(){ if(phase==="work"){enterRest();} else if(phase==="rest"){ if(index>=ROUNDS-1)finish(); else{index++;enterWork();} } }
-function tick(){ if(!running)return; seconds--; if(seconds<=0)advance(); else { if(seconds<=3)playSound("tickAudio"); render(); } }
+function tick(){ if(!running)return; seconds--; if(seconds<=0){advance();return;}
+  if(phase==="work" && noteThisRound && seconds===Math.max(4,Math.round(WORK/2))){ noteThisRound=false; say(pick(SUPPORT)); }
+  if(seconds<=3)playSound("tickAudio"); render(); }
 
 /* ---------- wake lock ---------- */
 let wake=null;
@@ -407,18 +457,20 @@ function toMenu(){ running=false; releaseWake(); if("speechSynthesis" in window)
   $("controls").classList.add("hidden"); $("badge").classList.add("hidden"); $("meta").classList.add("hidden"); updatePreview(); }
 
 /* ---------- menu wiring ---------- */
-function updatePreview(){ const f=parseFocus($("focusInput").value); const p=generate(selDiff,f);
+function updatePreview(){ const f=parseFocus($("focusInput").value); const p=generate(selDiff,f,selEquip);
   $("planPreview").textContent=`${DIFF[selDiff].label} · ${p.list.length} rounds · ~${Math.round((p.work+p.rest)*p.list.length/60)} min`; }
 $("diffGrid").addEventListener("click",e=>{ const c=e.target.closest(".diffCard"); if(!c)return; selDiff=c.dataset.diff;
   [...$("diffGrid").children].forEach(x=>x.classList.toggle("sel",x===c)); updatePreview(); });
+$("equipGrid").addEventListener("click",e=>{ const c=e.target.closest(".diffCard"); if(!c)return; selEquip=c.dataset.equip;
+  [...$("equipGrid").children].forEach(x=>x.classList.toggle("sel",x===c)); updatePreview(); });
 $("chips").addEventListener("click",e=>{ const c=e.target.closest(".chip"); if(!c)return; const val=c.dataset.focus;
   const cur=$("focusInput").value.trim();
-  if(val==="full"){ $("focusInput").value="full body"; [...$("chips").children].forEach(x=>x.classList.toggle("on",x===c)); }
+  if(val==="full"||val==="volleyball"){ $("focusInput").value=(val==="volleyball"?"volleyball":"full body"); [...$("chips").children].forEach(x=>x.classList.toggle("on",x===c)); }
   else { c.classList.toggle("on"); const on=[...$("chips").children].filter(x=>x.classList.contains("on")&&x.dataset.focus!=="full").map(x=>x.textContent); $("focusInput").value=on.join(", "); }
   updatePreview(); });
 $("focusInput").addEventListener("input",()=>{ [...$("chips").children].forEach(x=>x.classList.remove("on")); updatePreview(); });
-$("buildBtn").addEventListener("click",()=>{ const f=parseFocus($("focusInput").value); plan=generate(selDiff,f);
-  WORK=plan.work; REST=plan.rest; ROUNDS=plan.list.length; TOTAL=ROUNDS*(WORK+REST); index=0; seconds=WORK; phase="ready"; currentKey="";
+$("buildBtn").addEventListener("click",()=>{ const f=parseFocus($("focusInput").value); plan=generate(selDiff,f,selEquip);
+  WORK=plan.work; REST=plan.rest; ROUNDS=plan.list.length; TOTAL=ROUNDS*(WORK+REST); index=0; seconds=WORK; phase="ready"; currentKey=""; sinceNote=0; noteGap=2+Math.floor(Math.random()*2); noteThisRound=false;
   buildPlanSheet(); unlockAudio(); startWorkout(); });
 $("againBtn").addEventListener("click",toMenu);
 
